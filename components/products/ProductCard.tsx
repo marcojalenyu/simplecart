@@ -31,6 +31,7 @@ export function ProductCard({ product }: { product: Product }) {
           <ThemedText type="title">+</ThemedText>
         </Pressable>
       </ThemedView>
+      <ThemedText className="px-2 pb-3">{product.description}</ThemedText>
     </Card>
   );
 }
