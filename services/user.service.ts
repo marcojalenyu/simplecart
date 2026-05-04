@@ -22,6 +22,7 @@ export const userService = {
     const product = await productService.fetchProductById(productId);
     if (!product) return Promise.reject(new Error("Product not found"));
     const updatedUser = await addItem(user, product.id, quantity);
+    mockUsers.splice(mockUsers.indexOf(user), 1, updatedUser); // Update mock data
     return updatedUser;
   },
 
@@ -35,6 +36,7 @@ export const userService = {
     const product = await productService.fetchProductById(productId);
     if (!product) return Promise.reject(new Error("Product not found"));
     const updatedUser = await removeItem(user, product.id, quantity);
+    mockUsers.splice(mockUsers.indexOf(user), 1, updatedUser); // Update mock data
     return updatedUser;
   },
 
@@ -42,7 +44,11 @@ export const userService = {
     const user = mockUsers.find((user) => user.username === username);
     if (!user) return Promise.reject(new Error("User not found"));
     // For demo, we just apply 10% discount if code is "discount10"
-    if (discountCode === "discount10") return await setDiscount(user, 10);
+    if (discountCode === "discount10") {
+      const updatedUser = await setDiscount(user, 10);
+      mockUsers.splice(mockUsers.indexOf(user), 1, updatedUser); // Update mock data
+      return updatedUser;
+    }
     return user; // No discount applied
   },
 };
