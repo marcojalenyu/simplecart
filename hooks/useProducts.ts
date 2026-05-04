@@ -17,7 +17,7 @@ export function useProducts() {
       setError(null);
       const data = await productService.fetchProducts();
       setProducts(data);
-    } catch (err: any) {
+    } catch {
       setError("Failed to fetch products");
     } finally {
       setIsLoading(false);

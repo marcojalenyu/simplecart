@@ -19,16 +19,22 @@ export function Card({
 
 export function ImageCard({
   className,
+  imageClassName,
   source,
   alt,
 }: {
   className?: string;
+  imageClassName?: string;
   source: { uri: string };
   alt: string;
 }) {
   return (
     <Card className={`overflow-hidden border-none p-0 ${className || ""}`}>
-      <Image source={source} alt={alt} className="w-full h-48 object-cover" />
+      <Image
+        source={source}
+        alt={alt}
+        className={`w-full h-48 object-cover ${imageClassName || ""}`}
+      />
     </Card>
   );
 }
