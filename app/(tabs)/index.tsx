@@ -4,14 +4,18 @@ import { ProductList } from "@/components/products/ProductList";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { ImageCard } from "@/components/ui/Card";
+import { useAuth } from "@/hooks/useAuth";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
+  const { user } = useAuth();
   return (
     <SafeAreaView className="flex-1" edges={["top", "left", "right"]}>
       <ScrollView className="flex-1" contentContainerStyle={{ flexGrow: 1 }}>
         <ThemedView className="flex-1 py-16 px-6 gap-4">
-          <ThemedText type="subtitle">Welcome back!</ThemedText>
+          <ThemedText type="subtitle">
+            Welcome back, {user?.username}!
+          </ThemedText>
           <ImageCard
             source={require("@/assets/images/home-banner.png")}
             alt="Welcome Image"
