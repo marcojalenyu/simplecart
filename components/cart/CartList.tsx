@@ -45,9 +45,14 @@ export function CartList() {
           ))}
           <ThemedView className="flex flex-col gap-4 items-end text-lg font-semibold">
             {user.discount > 0 && (
-              <Text className="text-green-500">
-                {user.discount}% discount applied!{" "}
-              </Text>
+              <>
+                <ThemedText className="line-through">
+                  Total: ₱{total.toFixed(2)}
+                </ThemedText>
+                <Text className="text-green-500">
+                  {user.discount}% discount applied!{" "}
+                </Text>
+              </>
             )}
             <ThemedText>
               Total: ₱{(total * (1 - user.discount / 100)).toFixed(2)}
