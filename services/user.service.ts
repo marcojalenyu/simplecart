@@ -48,7 +48,8 @@ export const userService = {
       const updatedUser = await setDiscount(user, 10);
       mockUsers.splice(mockUsers.indexOf(user), 1, updatedUser); // Update mock data
       return updatedUser;
+    } else {
+      throw new Error("Invalid discount code");
     }
-    return user; // No discount applied
   },
 };
