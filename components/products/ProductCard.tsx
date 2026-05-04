@@ -1,22 +1,18 @@
 import { Product } from "@/domain/product/product.types";
 import { useAuth } from "@/hooks/useAuth";
-import { userService } from "@/services/user.service";
+import { useCart } from "@/hooks/useCart";
 import { Pressable } from "react-native";
 import { ThemedText } from "../themed-text";
 import { ThemedView } from "../themed-view";
 import { Card, ImageCard } from "../ui/Card";
 
 export function ProductCard({ product }: { product: Product }) {
-  const { user, setUser } = useAuth();
+  const { user } = useAuth();
+  const { addToCart } = useCart();
 
   const handleAddToCart = async () => {
     if (!user) return;
-    const updatedUser = await userService.addToCart(
-      user.username,
-      product.id,
-      1,
-    );
-    setUser(updatedUser);
+    await addToCart(user.username, product.id, 1);
     alert(`${product.productName} added to cart!`);
   };
 
